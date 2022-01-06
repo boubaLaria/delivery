@@ -17,14 +17,6 @@ const orderSchema = new mongoose.Schema(
       city: { type: String, required: true },
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
-      location: {
-        lat: String,
-        lng: String,
-        address: String,
-        name: String,
-        vicinity: String,
-        googleAddressId: String,
-      },
     },
     paymentMethod: { type: String, required: true },
     paymentResult: { id: String, status: String, email_address: String },
@@ -43,4 +35,4 @@ const orderSchema = new mongoose.Schema(
 );
 
 const Order = mongoose.models.Order || mongoose.model('Order', orderSchema);
-export default Order;
+export default Order; 

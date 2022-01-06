@@ -42,6 +42,7 @@ export default function Home(props) {
                 src={product.featuredImage}
                 alt={product.name}
                 className={classes.featuredImage}
+            
               ></img>
             </Link>
           </NextLink>

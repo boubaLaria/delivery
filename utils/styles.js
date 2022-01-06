@@ -102,5 +102,10 @@ const useStyles = makeStyles((theme) => ({
       width: 250,
     },
   },
+  featuredImage:{
+    height:'30rem',
+    width:'100%'
+  }
+  
 }));
 export default useStyles;

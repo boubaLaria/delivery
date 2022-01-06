@@ -20,7 +20,6 @@ export default function Shipping() {
     control,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm();
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -28,7 +27,6 @@ export default function Shipping() {
     userInfo,
     cart: { shippingAddress },
   } = state;
-  const { location } = shippingAddress;
   useEffect(() => {
     if (!userInfo) {
       router.push('/login?redirect=/shipping');
@@ -44,27 +42,6 @@ export default function Shipping() {
   const submitHandler = ({ fullName, address, city, postalCode, country }) => {
     dispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
-      payload: { fullName, address, city, postalCode, country, location },
-    });
-    Cookies.set('shippingAddress', {
-      fullName,
-      address,
-      city,
-      postalCode,
-      country,
-      location,
-    });
-    router.push('/payment');
-  };
-
-  const chooseLocationHandler = () => {
-    const fullName = getValues('fullName');
-    const address = getValues('address');
-    const city = getValues('city');
-    const postalCode = getValues('postalCode');
-    const country = getValues('country');
-    dispatch({
-      type: 'SAVE_SHIPPING_ADDRESS',
       payload: { fullName, address, city, postalCode, country },
     });
     Cookies.set('shippingAddress', {
@@ -73,9 +50,8 @@ export default function Shipping() {
       city,
       postalCode,
       country,
-      location,
     });
-    router.push('/map');
+    router.push('/payment');
   };
   return (
     <Layout title="Shipping Address">
@@ -224,18 +200,6 @@ export default function Shipping() {
                 ></TextField>
               )}
             ></Controller>
-          </ListItem>
-          <ListItem>
-            <Button
-              variant="contained"
-              type="button"
-              onClick={chooseLocationHandler}
-            >
-              Choose on map
-            </Button>
-            <Typography>
-              {location.lat && `${location.lat}, ${location.lat}`}
-            </Typography>
           </ListItem>
           <ListItem>
             <Button variant="contained" type="submit" fullWidth color="primary">
