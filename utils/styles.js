@@ -2,10 +2,12 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
-    backgroundColor: '#203040',
+    // backgroundColor: '#203040',
+    backgroundColor: 'black',
+
     '& a': {
       color: '#ffffff',
-      marginLeft: 10,
+      // marginLeft: 10,
     },
   },
   brand: {
@@ -16,11 +18,20 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   main: {
+    // backgroundColor:'#eaeded',
     minHeight: '80vh',
+  
+  },
+  tFooter:{
+    fontFamily:'inerit',
+    fontSize:'15px'
   },
   footer: {
-    marginTop: 10,
     textAlign: 'center',
+    backgroundColor:'black',
+    color:'white',
+    paddingTop:'20px',
+    paddingBottom:'20px'
   },
   section: {
     marginTop: 10,
@@ -57,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   menuButton: { padding: 0 },
-  mt1: { marginTop: '1rem' },
+  // mt1: { marginTop: '1rem' },
   // search
   searchSection: {
     display: 'none',
@@ -105,6 +116,24 @@ const useStyles = makeStyles((theme) => ({
   featuredImage:{
     height:'30rem',
     width:'100%'
+  },
+  desc:{
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    display: "-webkit-box",
+    WebkitLineClamp: "2",
+    WebkitBoxOrient: "vertical",
+    color:"black",
+    marginTop:'7px',
+    marginBottom:'7px',
+  },
+  linkCard:{
+    cursor: "pointer",
+    margin:'auto'
+  
+  },
+  imgProduct:{
+    backgroundColor:'#fafafa'
   }
   
 }));
