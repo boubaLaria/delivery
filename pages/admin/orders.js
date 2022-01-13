@@ -142,7 +142,8 @@ function AdminOrders() {
                                 ? `delivered at ${order.deliveredAt}`
                                 : 'not delivered'}
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="d-flex">
+                              <Button variant="contained">Payer</Button>
                               <NextLink href={`/order/${order._id}`} passHref>
                                 <Button variant="contained">Details</Button>
                               </NextLink>

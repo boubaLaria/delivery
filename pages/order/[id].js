@@ -135,6 +135,7 @@ function Order({ params }) {
       };
       loadPaypalScript();
     }
+    console.log(order);
   }, [order, successPay, successDeliver]);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -344,11 +345,11 @@ function Order({ params }) {
                     </Grid>
                   </Grid>
                 </ListItem>
-                {!isPaid && (
+                {!isPaid  && (
                   <ListItem>
                     {isPending ? (
                       <CircularProgress />
-                    ) : (
+                    ) : paymentMethod!="Cash"?(
                       <div className={classes.fullWidth}>
                         <PayPalButtons
                           createOrder={createOrder}
@@ -356,10 +357,10 @@ function Order({ params }) {
                           onError={onError}
                         ></PayPalButtons>
                       </div>
-                    )}
+                    ): null}
                   </ListItem>
                 )}
-                {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                {userInfo?.isAdmin && order?.isPaid && !order?.isDelivered && (
                   <ListItem>
                     {loadingDeliver && <CircularProgress />}
                     <Button
