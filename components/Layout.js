@@ -98,6 +98,7 @@ export default function Layout({ title, description, children }) {
 
   useEffect(() => {
     fetchCategories();
+    document.addEventListener("mousedown", loginMenuCloseHandler);
   }, []);
 
   const darkModeChangeHandler = () => {
@@ -122,6 +123,8 @@ export default function Layout({ title, description, children }) {
     Cookies.remove('cartItems');
     router.push('/');
   };
+
+
   return (
     <div>
       <Head>
