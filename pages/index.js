@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import NextLink from 'next/link';
-import { Grid, Link, Typography } from '@material-ui/core';
+import {Link, } from '@material-ui/core';
 import Layout from '../components/Layout';
 import db from '../utils/db';
 import Product from '../models/Product';
@@ -29,8 +29,10 @@ export default function Home(props) {
     router.push('/cart');
   };
   return (
-    <Layout>
-      <Carousel className={classes.mt1} animation="slide">
+    <Layout >
+      <Carousel className={classes.mt1} 
+      indicators={false}
+      animation="slide">
         {featuredProducts.map((product) => (
           <NextLink
             key={product._id}
@@ -48,17 +50,54 @@ export default function Home(props) {
           </NextLink>
         ))}
       </Carousel>
-      <Typography variant="h2">Popular Products</Typography>
-      <Grid container spacing={3}>
-        {topRatedProducts.map((product) => (
-          <Grid item md={4} key={product.name}>
+      
+      {/* <Typography variant="h2">Popular Products</Typography> */}
+      <div className="grid bg-gray-200 grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto ">
+        
+        {topRatedProducts
+        .slice(0, 4)
+        .map((product) => (
+         
             <ProductItem
+            key={product.name}
               product={product}
               addToCartHandler={addToCartHandler}
             />
-          </Grid>
+          
         ))}
-      </Grid>
+        <img
+        className="md:col-span-full my-2"
+        src="https://links.papareact.com/dyz"
+        alt=""
+      />
+       <div className="md:col-span-2  ">
+       {topRatedProducts
+        .slice(4, 5)
+        .map((product) => (
+         
+            <ProductItem
+            key={product.name} 
+              product={product}
+              addToCartHandler={addToCartHandler}
+            />
+         
+        ))}
+       </div>
+
+       
+       {topRatedProducts
+       .slice(5, props.length)
+        .map((product) => (
+          
+            <ProductItem
+            key={product.name} 
+              product={product}
+              addToCartHandler={addToCartHandler}
+            />
+          
+        ))}
+      </div>
+     
     </Layout>
   );
 }
@@ -70,13 +109,13 @@ export async function getServerSideProps() {
     '-reviews'
   )
     .lean()
-    .limit(3);
+    .limit(100);
   const topRatedProductsDocs = await Product.find({}, '-reviews')
     .lean()
     .sort({
       rating: -1,
     })
-    .limit(6);
+    .limit(150);
   await db.disconnect();
   return {
     props: {
