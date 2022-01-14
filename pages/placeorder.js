@@ -75,10 +75,12 @@ function PlaceOrder() {
           },
         }
       );
+      enqueueSnackbar('your order is success we will contact you soon', { variant: 'success' });
       dispatch({ type: 'CART_CLEAR' });
       Cookies.remove('cartItems');
       setLoading(false);
       router.push(`/order/${data._id}`);
+      
     } catch (err) {
       setLoading(false);
       enqueueSnackbar(getError(err), { variant: 'error' });

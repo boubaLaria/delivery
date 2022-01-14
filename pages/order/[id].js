@@ -345,7 +345,7 @@ function Order({ params }) {
                     </Grid>
                   </Grid>
                 </ListItem>
-                {!isPaid  && (
+                {!isPaid && !userInfo.isAdmin  &&(
                   <ListItem>
                     {isPending ? (
                       <CircularProgress />
