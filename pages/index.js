@@ -52,7 +52,7 @@ export default function Home(props) {
       </Carousel>
       
       {/* <Typography variant="h2">Popular Products</Typography> */}
-      <div className="grid bg-gray-200 grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto ">
+      <div className="grid bg-gray-200 grid-flow-row-dense md:grid-cols-2z lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto ">
         
         {topRatedProducts
         .slice(0, 4)
