@@ -371,14 +371,6 @@ function Order({ params }) {
                       <CircularProgress />
                     ) :
                   <div className={classes.fullWidth}>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    onClick={payer}
-                  >
-                    paypal
-                  </Button>
                       <PayPalButtons
                         createOrder={createOrder}
                         onApprove={onApprove}
