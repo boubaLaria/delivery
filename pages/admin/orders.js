@@ -23,6 +23,7 @@ import { getError } from '../../utils/error';
 import { Store } from '../../utils/Store';
 import Layout from '../../components/Layout';
 import useStyles from '../../utils/styles';
+import { formatDate } from '../../utils/other';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -130,20 +131,19 @@ function AdminOrders() {
                             <TableCell>
                               {order.user ? order.user.name : 'DELETED USER'}
                             </TableCell>
-                            <TableCell>{order.createdAt}</TableCell>
+                            <TableCell>{formatDate(order.createdAt)}</TableCell>
                             <TableCell>${order.totalPrice}</TableCell>
                             <TableCell>
                               {order.isPaid
-                                ? `paid at ${order.paidAt}`
+                                ? `paid at ${formatDate(order.paidAt)}`
                                 : 'not paid'}
                             </TableCell>
                             <TableCell>
                               {order.isDelivered
-                                ? `delivered at ${order.deliveredAt}`
+                                ? `delivered at ${formatDate(order.deliveredAt)}`
                                 : 'not delivered'}
                             </TableCell>
-                            <TableCell className="d-flex">
-                              <Button variant="contained">Payer</Button>
+                            <TableCell className="d-flexk">
                               <NextLink href={`/order/${order._id}`} passHref>
                                 <Button variant="contained">Details</Button>
                               </NextLink>
