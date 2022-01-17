@@ -52,7 +52,8 @@ export default function Home(props) {
       </Carousel>
       
       {/* <Typography variant="h2">Popular Products</Typography> */}
-      <div className="grid bg-gray-200 grid-flow-row-dense md:grid-cols-2z lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto ">
+      {/* <div className="grid bg-gray-200 grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto "> */}
+      <div className="grid  grid-flow-row-dense grid-cols-2 md:grid-cols-3 bg-gray-200 xl:grid-cols-4  md:-mt-52 mx-auto ">
         
         {topRatedProducts
         .slice(0, 4)
@@ -62,15 +63,17 @@ export default function Home(props) {
             key={product.name}
               product={product}
               addToCartHandler={addToCartHandler}
+             
             />
+           
           
         ))}
         <img
-        className="md:col-span-full my-2"
+        className="col-span-full my-2"
         src="https://links.papareact.com/dyz"
         alt=""
       />
-       <div className="md:col-span-2  ">
+       <div className="md:col-span-2 grid grid-flow-col-dense ">
        {topRatedProducts
         .slice(4, 5)
         .map((product) => (
@@ -79,6 +82,7 @@ export default function Home(props) {
             key={product.name} 
               product={product}
               addToCartHandler={addToCartHandler}
+            
             />
          
         ))}
