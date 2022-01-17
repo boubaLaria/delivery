@@ -20,27 +20,28 @@ const useStyles = makeStyles((theme) => ({
   main: {
     // backgroundColor:'#eaeded',
     minHeight: '80vh',
-  
   },
-  tFooter:{
-    fontFamily:'inerit',
-    fontSize:'15px'
+  tFooter: {
+    fontFamily: 'inerit',
+    fontSize: '15px',
   },
   footer: {
     textAlign: 'center',
-    backgroundColor:'black',
-    color:'white',
-    paddingTop:'20px',
-    paddingBottom:'20px'
+    backgroundColor: 'black',
+    color: 'white',
+    paddingTop: '20px',
+    paddingBottom: '20px',
   },
   section: {
     marginTop: 10,
     marginBottom: 10,
+    // marginLeft:10
   },
   form: {
     width: '100%',
     maxWidth: 800,
     margin: '0 auto',
+    textAlign: 'center',
   },
   navbarButton: {
     color: '#ffffff',
@@ -113,28 +114,54 @@ const useStyles = makeStyles((theme) => ({
       width: 250,
     },
   },
-  featuredImage:{
-    height:'30rem',
-    width:'100%'
+  featuredImage: {
+    height: '30rem',
+    width: '100%',
+    [theme.breakpoints.down('sm')]: {
+      height: 200,
+      width: '100%',
+    },
   },
-  desc:{
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    display: "-webkit-box",
-    WebkitLineClamp: "2",
-    WebkitBoxOrient: "vertical",
-    color:"black",
-    marginTop:'7px',
-    marginBottom:'7px',
+  desc: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    WebkitLineClamp: '2',
+    WebkitBoxOrient: 'vertical',
+    // color: 'black',
+    maxWidth:"200"
+    
+    // marginTop:'4px',
+    // marginBottom:'4px',
   },
-  linkCard:{
-    cursor: "pointer",
-    margin:'auto'
-  
+  raitin: {
+    backgroundColor: '#cfccc6',
+    [theme.breakpoints.between('300', '350')]: {
+      display: 'none',
+    },
   },
-  imgProduct:{
-    backgroundColor:'#fafafa'
+  linkCard: {
+    cursor: 'pointer',
+    margin: 'auto',
+    height: '90px',
+    width: '100%',
+    [theme.breakpoints.between('lg', 'xl')]: {
+      height: 200,
+      width: 200,
+    },
+  },
+  imgProduct: {
+    // backgroundColor:'#fafafa',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  imgCheckout:{
+    paddingTop:10,
+    height:230,
+    [theme.breakpoints.between('xs', 'md')]: {
+      height: 'auto',
+      
+    },
   }
-  
 }));
 export default useStyles;

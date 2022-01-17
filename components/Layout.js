@@ -1,7 +1,12 @@
 import React, { useContext } from 'react';
 import Head from 'next/head';
 import NextLink from 'next/link';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import YouTube from '@material-ui/icons/YouTube';
+import Instagram from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
+TwitterIcon
 import {
   AppBar,
   Toolbar,
@@ -55,15 +60,17 @@ export default function Layout({ title, description, children }) {
         margin: '1rem 0',
       },
     },
+   
     palette: {
       type: darkMode ? 'dark' : 'light',
       primary: {
-        main: '#eaeded',
+        main: '#f0c000',
       },
       secondary: {
         main: '#208080',
       },
     },
+    
   });
   const classes = useStyles();
 
@@ -217,7 +224,7 @@ export default function Layout({ title, description, children }) {
                     '0'
                   )}
                 </span>
-                <ShoppingCartIcon className="h-10" />
+                <ShoppingCartIcon className="h-10 font-thin" />
                 <p className=" hidden md:inline font-extrabold md:text-sm">
                   Basket
                 </p>
@@ -311,12 +318,12 @@ export default function Layout({ title, description, children }) {
           </IconButton>
           
           <div className="flex items-center space-x-3   overflow-x-visible overflow-hidden whitespace-nowrap ">
-            <p className="link pl-3">Prime videos</p>
-            <p className="link ">Abdoulaye Bussiness </p>
-            <p className="link ">Todays deals</p>
-            <p className="link hidden lg:inline-flex">Buy Again</p>
-            <p className="link hidden lg:inline-flex">Shopper Toolkt</p>
-            <p className="link hidden lg:inline-flex">Health & Personal care</p>
+            <p className="link pl-3">Help Center</p>
+            <p className="link ">Become a Seller </p>
+            <p className="link ">Promotion</p>
+            <p className="link hidden lg:inline-flex">Register</p>
+            <p className="link hidden lg:inline-flex">Customer Service</p>
+            <p className="link hidden lg:inline-flex">Terme & Confidentiality</p>
           </div>
         </div>
 
@@ -326,11 +333,20 @@ export default function Layout({ title, description, children }) {
           <a href="#top">Back to top of page</a>
         </button>
         <footer className={classes.footer}>
+        <Typography style={{marginBottom:"15px"}}>
+            Follow us on : <FacebookIcon style={{color:'yellow'}}/>
+            <Instagram style={{color:'yellow'}} />
+            <YouTube style={{color:'yellow'}} />
+            <TwitterIcon style={{color:'yellow'}} />
+          </Typography>
+          
           <Typography variant="h6" className={classes.tFooter}>
             Conditions of UsePrivacy NoticeInterest-Based Ads© 2022,
             Delivery.com, Inc. or its affiliates
           </Typography>
+         
           <Switch checked={darkMode} onChange={darkModeChangeHandler}></Switch>
+          
         </footer>
       </ThemeProvider>
     </div>

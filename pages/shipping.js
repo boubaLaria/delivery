@@ -4,6 +4,7 @@ import {
   Typography,
   TextField,
   Button,
+  Container,
 } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect } from 'react';
@@ -55,6 +56,8 @@ export default function Shipping() {
   };
   return (
     <Layout title="Shipping Address">
+      <Container maxWidth='lg'>
+
       <CheckoutWizard activeStep={1} />
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Typography component="h1" variant="h1">
@@ -159,7 +162,7 @@ export default function Shipping() {
                   variant="outlined"
                   fullWidth
                   id="postalCode"
-                  label="Postal Code"
+                  label="Telephone"
                   error={Boolean(errors.postalCode)}
                   helperText={
                     errors.postalCode
@@ -202,12 +205,13 @@ export default function Shipping() {
             ></Controller>
           </ListItem>
           <ListItem>
-            <Button variant="contained" type="submit" fullWidth color="primary">
+            <Button fullWidth type="submit" className='button'>
               Continue
             </Button>
           </ListItem>
         </List>
       </form>
+      </Container>
     </Layout>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import NextLink from 'next/link';
-import Image from 'next/image';
+// import Image from 'next/image';
 import {
   Grid,
   Link,
@@ -11,7 +11,9 @@ import {
   Button,
   TextField,
   CircularProgress,
+  Container,
 } from '@material-ui/core';
+import BackIcon from '@material-ui/icons/ArrowBack';
 import Rating from '@material-ui/lab/Rating';
 import Layout from '../../components/Layout';
 import useStyles from '../../utils/styles';
@@ -88,22 +90,24 @@ export default function ProductScreen(props) {
 
   return (
     <Layout title={product.name} description={product.description}>
+      <Container maxWidth='lg' >
       <div className={classes.section}>
         <NextLink href="/" passHref>
           <Link>
-            <Typography>back to products</Typography>
+            <BackIcon class="h-10 w-15 my-3 border-2 button"/>
           </Link>
         </NextLink>
       </div>
-      <Grid container spacing={1}>
-        <Grid item md={6} xs={12}>
-          <Image
+      <Grid container spacing={3}>
+        <Grid item md={6} xs={12} className={classes.imgProduct}>
+          <input type='image'
             src={product.image}
             alt={product.name}
-            width={640}
-            height={640}
+            width={"90%"}
+            height={"90%"}
             layout="responsive"
-          ></Image>
+            
+          ></input>
         </Grid>
         <Grid item md={3} xs={12}>
           <List>
@@ -157,9 +161,9 @@ export default function ProductScreen(props) {
               <ListItem>
                 <Button
                   fullWidth
-                  variant="contained"
-                  color="primary"
+                 
                   onClick={addToCartHandler}
+                  className='button'
                 >
                   Add to cart
                 </Button>
@@ -195,10 +199,10 @@ export default function ProductScreen(props) {
           {userInfo ? (
             <form onSubmit={submitHandler} className={classes.reviewForm}>
               <List>
-                <ListItem>
+                <ListItem style={{paddingLeft:0}}>
                   <Typography variant="h2">Leave your review</Typography>
                 </ListItem>
-                <ListItem>
+                <ListItem style={{paddingLeft:0}}>
                   <TextField
                     multiline
                     variant="outlined"
@@ -209,22 +213,23 @@ export default function ProductScreen(props) {
                     onChange={(e) => setComment(e.target.value)}
                   />
                 </ListItem>
-                <ListItem>
+                <ListItem style={{paddingLeft:0}}>
                   <Rating
                     name="simple-controlled"
                     value={rating}
                     onChange={(e) => setRating(e.target.value)}
                   />
                 </ListItem>
-                <ListItem>
-                  <Button
+                <ListItem style={{paddingLeft:0}}>
+                  <button 
                     type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
+                    className=' w-full button'
                   >
                     Submit
-                  </Button>
+                  </button>
 
                   {loading && <CircularProgress></CircularProgress>}
                 </ListItem>
@@ -241,6 +246,7 @@ export default function ProductScreen(props) {
           )}
         </ListItem>
       </List>
+      </Container>
     </Layout>
   );
 }
