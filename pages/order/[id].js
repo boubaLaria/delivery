@@ -26,6 +26,7 @@ import useStyles from '../../utils/styles';
 import { useSnackbar } from 'notistack';
 import { getError } from '../../utils/error';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+import {formatDate} from '../../utils/other'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -135,6 +136,7 @@ function Order({ params }) {
       };
       loadPaypalScript();
     }
+    console.log(order);
   }, [order, successPay, successDeliver]);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -171,6 +173,24 @@ function Order({ params }) {
     });
   }
 
+  async function payer() {
+      try {
+        dispatch({ type: 'PAY_REQUEST' });
+        const { data } = await axios.put(
+          `/api/orders/${order._id}/pay`,
+          {},
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        dispatch({ type: 'PAY_SUCCESS', payload: data });
+        enqueueSnackbar('Order is paid', { variant: 'success' });
+      } catch (err) {
+        dispatch({ type: 'PAY_FAIL', payload: getError(err) });
+        enqueueSnackbar(getError(err), { variant: 'error' });
+      }
+  }
+
   function onError(err) {
     enqueueSnackbar(getError(err), { variant: 'error' });
   }
@@ -185,14 +205,15 @@ function Order({ params }) {
           headers: { authorization: `Bearer ${userInfo.token}` },
         }
       );
-      dispatch({ type: 'DELIVER_SUCCESS', payload: data });
+      dispatch({ type: 'PAY_SUCCESS', payload: data });
       enqueueSnackbar('Order is delivered', { variant: 'success' });
     } catch (err) {
       dispatch({ type: 'DELIVER_FAIL', payload: getError(err) });
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
-  }
-
+  }  
+  
+  
   return (
     <Layout title={`Order ${orderId}`}>
       <Typography component="h1" variant="h1">
@@ -220,7 +241,7 @@ function Order({ params }) {
                 <ListItem>
                   Status:{' '}
                   {isDelivered
-                    ? `delivered at ${deliveredAt}`
+                    ? `delivered at ${formatDate(deliveredAt)}`
                     : 'not delivered'}
                 </ListItem>
               </List>
@@ -234,7 +255,7 @@ function Order({ params }) {
                 </ListItem>
                 <ListItem>{paymentMethod}</ListItem>
                 <ListItem>
-                  Status: {isPaid ? `paid at ${paidAt}` : 'not paid'}
+                  Status: {isPaid ? `paid at ${formatDate(paidAt)}` : 'not paid'}
                 </ListItem>
               </List>
             </Card>
@@ -344,22 +365,43 @@ function Order({ params }) {
                     </Grid>
                   </Grid>
                 </ListItem>
-                {!isPaid && !userInfo.isAdmin  &&(
+                {userInfo?.isAdmin &&  !order?.isPaid && paymentMethod!="Cash" &&(
                   <ListItem>
-                    {isPending ? (
+                    {!userInfo ? (
                       <CircularProgress />
-                    ) : (
-                      <div className={classes.fullWidth}>
-                        <PayPalButtons
-                          createOrder={createOrder}
-                          onApprove={onApprove}
-                          onError={onError}
-                        ></PayPalButtons>
-                      </div>
-                    )}
+                    ) :
+                  <div className={classes.fullWidth}>
+                      <PayPalButtons
+                        createOrder={createOrder}
+                        onApprove={onApprove}
+                        onError={onError}
+                      ></PayPalButtons>
+                    </div>}
+                      
+                    
+                    
                   </ListItem>
                 )}
-                {userInfo.isAdmin && !order.isDelivered && (
+                {userInfo?.isAdmin &&  !order?.isPaid && paymentMethod==="Cash" &&(
+                  <ListItem>
+                    {isPending && <CircularProgress />}
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      onClick={payer}
+                    >
+                      Payer
+                    </Button>
+                  </ListItem>
+                )}
+                {userInfo?.isAdmin &&  !order?.isPaid && paymentMethod!="Cash" &&(
+                  <ListItem>
+                    {isPending && <CircularProgress />}
+                    
+                  </ListItem>
+                )}
+                {userInfo?.isAdmin && order?.isPaid && !order?.isDelivered && (
                   <ListItem>
                     {loadingDeliver && <CircularProgress />}
                     <Button
